@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="palette" mtime="1567566210" type="string">
+		<stringvalue>#4a4a50505d5d:#f8f811114141:#232397974a4a:#fdfd7e7e5757:#28285b5bffff:#8c8c6262fdfd:#36366f6f9a9a:#ccccd5d5e5e5:#616169697a7a:#fcfc4a4a6d6d:#3737bdbd5858:#f6f6bebe4848:#19199f9ffdfd:#fcfc5858f6f6:#5050acacaeae:#ffffffffffff</stringvalue>
+	</entry>
+	<entry name="color" mtime="1567566208" type="string">
+		<stringvalue>#ababb2b2bfbf</stringvalue>
+	</entry>
+</gconf>
