@@ -88,7 +88,7 @@ set background=dark
 colorscheme synthwave84
 
 " Remaps
-noremap cp yap<S-}>p
+nnoremap cp yap<S-}>p
 nnoremap Q @q
 vnoremap Q :norm @q<cr>
 noremap <S-l> gt
