@@ -1,104 +1,100 @@
 {
-  "workbench.colorTheme": "One Monokai",
-  "git.enableSmartCommit": true,
-  "git.autorefresh": true,
-  "explorer.confirmDragAndDrop": false,
-  "editor.formatOnPaste": true,
-  "editor.fontLigatures": true,
-  "editor.fontFamily": "'Liga Droid Sans Mono', monospace",
-  "files.eol": "\n",
-  "python.linting.pylintPath": "/home/goose/.local/bin/pylint",
-  "editor.suggestSelection": "first",
-  "files.exclude": {
-    "**/.classpath": true,
-    "**/.project": true,
-    "**/.settings": true,
-    "**/.factorypath": true
-  },
-  "git.autofetch": true,
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": ["<leader>", "d"],
-      "after": ["\"", "_", "d"]
+    "workbench.colorTheme": "One Monokai",
+    "git.enableSmartCommit": true,
+    "git.autorefresh": true,
+    "explorer.confirmDragAndDrop": false,
+    "editor.formatOnPaste": true,
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "'Liga Droid Sans Mono', monospace",
+    "files.eol": "\n",
+    "python.linting.pylintPath": "/home/goose/.local/bin/pylint",
+    "editor.suggestSelection": "first",
+    "files.exclude": {
+      "**/.classpath": true,
+      "**/.project": true,
+      "**/.settings": true,
+      "**/.factorypath": true
     },
-    {
-      "before": ["\n"],
-      "after": ["o", "<ESC>"]
+    "git.autofetch": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+      {
+        "before": ["<leader>", "d"],
+        "after": ["\"", "_", "d"]
+      },
+      {
+        "before": ["\n"],
+        "after": ["o", "<ESC>"]
+      },
+      {
+        "before": ["<leader>", "p"],
+        "after": ["\"", "+", "p"]
+      },
+      {
+        "before": ["<leader>", "y"],
+        "after": ["\"", "+", "y"]
+      },
+      {
+        "before": ["<leader>", "c"],
+        "after": ["\"", "+", "c"]
+      },
+      {
+        "before": ["<leader>", "o"],
+        "after": ["^", "7", "0", "l", "B", "i", "\n", "<ESC>"]
+      },
+      {
+        "before": ["y", "<leader>"],
+        "after": ["g", "g", "\"", "+", "y", "G", "<C-o>", "z", "z"]
+      },
+      {
+        "before": ["c", "a", "<leader>"],
+        "after": ["c", "i", "<leader>"]
+      },
+      {
+        "before": ["<leader>", "g", "r"],
+        "after": ["\"", "+", "g", "r"]
+      }
+    ],
+    "vim.handleKeys": {
+      "<C-f>": false,
+      "<C-c>": false
     },
-    {
-      "before": ["<leader>", "p"],
-      "after": ["\"", "+", "p"]
+    "vim.camelCaseMotion.enable": true,
+    "vim.useCtrlKeys": true,
+    "vim.sneak": true,
+    "vim.sneakReplacesF": true,
+    "editor.lineNumbers": "relative",
+    "vim.leader": " ",
+    "vim.replaceWithRegister": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "python.languageServer": "Jedi",
+    "explorer.confirmDelete": false,
+    "workbench.editorAssociations": {
+      "*.ipynb": "jupyter-notebook"
     },
-    {
-      "before": ["<leader>", "y"],
-      "after": ["\"", "+", "y"]
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.fontSize": 14,
+    "editor.tabSize": 2,
+    "editor.cursorStyle": "line",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "editor.wordWrap": "off",
+    "editor.detectIndentation": false,
+    "files.associations": {
+      "*.json": "jsonc"
     },
-    {
-      "before": ["<leader>", "c"],
-      "after": ["\"", "+", "c"]
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    {
-      "before": ["<leader>", "o"],
-      "after": ["^", "7", "0", "l", "B", "i", "\n", "<ESC>"]
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    {
-      "before": ["y", "<leader>"],
-      "after": ["g", "g", "\"", "+", "y", "G", "<C-o>", "z", "z"]
+    "notebook.cellToolbarLocation": {
+      "default": "right",
+      "jupyter-notebook": "left"
     },
-    {
-      "before": ["c", "a", "<leader>"],
-      "after": ["c", "i", "<leader>"]
-    },
-    {
-      "before": ["<leader>", "g", "r"],
-      "after": ["\"", "+", "g", "r"]
-    }
-  ],
-  "vim.handleKeys": {
-    "<C-f>": false,
-    "<C-c>": false
-  },
-  "vim.camelCaseMotion.enable": true,
-  "vim.useCtrlKeys": true,
-  "vim.sneak": true,
-  "vim.sneakReplacesF": true,
-  "editor.lineNumbers": "relative",
-  "vim.leader": " ",
-  "vim.replaceWithRegister": true,
-  "python.insidersChannel": "off",
-  "files.insertFinalNewline": true,
-  "files.trimFinalNewlines": true,
-  "python.languageServer": "Jedi",
-  "keyboard.dispatch": "keyCode",
-  "explorer.confirmDelete": false,
-  "workbench.editorAssociations": {
-    "*.ipynb": "jupyter-notebook"
-  },
-  "diffEditor.ignoreTrimWhitespace": false,
-  "editor.fontSize": 14,
-  "c3.savedEnvironments": [
-    "Dev13, https://dev13-idsc3training.stagetrainingids.c3aids.cloud/static/console/, IdsC3training, Johnny.Urosevic@c3iot.com"
-  ],
-  "editor.tabSize": 2,
-  "editor.cursorStyle": "line",
-  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
-  "editor.wordWrap": "off",
-  "editor.detectIndentation": false,
-  "files.associations": {
-    "*.json": "jsonc"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "window.zoomLevel": -1,
-  "notebook.cellToolbarLocation": {
-    "default": "right",
-    "jupyter-notebook": "left"
-  },
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "vim.vimrc.enable": true
-}
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "D:\\.vimrc",
+  }
+
