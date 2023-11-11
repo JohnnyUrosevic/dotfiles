@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+alias sudo="nocorrect sudo"
+alias yay=paru
+alias ls="ls -a"
+alias vi=vim
+alias please='sudo $(fc -ln -1)'
+alias slippi='mangohud gamemoderun slippi'
