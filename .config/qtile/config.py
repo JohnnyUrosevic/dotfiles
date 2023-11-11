@@ -72,6 +72,7 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
+    Key([mod], "period", lazy.next_screen(), desc="Move focus between monitors"),
     ######### Toggling Between Active Groups #########
     Key([mod], "Tab", lazy.screen.next_group(skip_empty=True), desc="Toggel next active group"),
     Key([alt], "Tab", lazy.screen.prev_group(skip_empty=True), desc="Toggel previous active group"),
@@ -94,7 +95,6 @@ keys = [
     Key([mod], "f", lazy.window.toggle_floating(), desc="Toggle Floating layout"),
     Key([mod, "shift"], "o", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
-
     ### Rofi ###
     Key([mod], "space", lazy.spawn(app_launcher), desc="Launch Rofi drun"),
     Key([alt], "space", lazy.spawn(cmd_launcher), desc="Launch Rofi run"),
