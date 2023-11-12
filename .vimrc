@@ -85,7 +85,7 @@ set listchars=tab:▸\ ,eol:¬
 set termguicolors
 set t_Co=256
 set background=dark
-colorscheme synthwave84
+colorscheme one-monokai
 
 " Remaps
 nnoremap cp yap<S-}>p
@@ -102,3 +102,15 @@ noremap <leader>l <C-w>l
 noremap <leader>h <C-w>h
 noremap <leader>j <C-w>j
 noremap <leader>k <C-w>k
+
+" delete without yanking
+noremap <leader>d \"_d
+
+" add empty lines without leaving normal
+nnoremap <CR> o<Esc>
+
+" interact with system clipboard
+noremap <leader>p \"+p
+noremap <leader>y \"+y
+noremap <leader>c \"+c
+nnoremap y<leader> gg\"+yG<C-o>zz
