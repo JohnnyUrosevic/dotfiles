@@ -17,7 +17,14 @@ ENABLE_CORRECTION="true"
 
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting archlinux)
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  git-open
+  zsh-archlinux
+  z
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -25,6 +32,6 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export MANGOHUD=1
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/lib/rustup/bin:/home/goose/.local/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/lib/rustup/bin:$HOME/.local/bin:$PATH
 
 source ~/.alias
