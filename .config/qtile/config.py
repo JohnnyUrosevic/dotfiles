@@ -95,18 +95,26 @@ keys = [
     Key([mod], "f", lazy.window.toggle_floating(), desc="Toggle Floating layout"),
     Key([mod, "shift"], "o", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
-    ### Rofi ###
+    ######### Rofi #########
     Key([mod], "space", lazy.spawn(app_launcher), desc="Launch Rofi drun"),
     Key([alt], "space", lazy.spawn(cmd_launcher), desc="Launch Rofi run"),
     Key([alt], "w", lazy.spawn(win_launcher), desc="Launch Rofi Windows"),
+    ######### Power and Lockscreen #########
     Key([mod, "shift"], "e", lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/power.sh")), desc="Rofi Power Menu"),
     Key([mod, "shift"], "x", lazy.spawn(lock), desc="Betterlockscreen"),
+    ######### Application Shortcuts #########
     Key([mod], "w", lazy.spawn(browser), desc="Launch Browser"),
     Key([mod], "n", lazy.spawn(file_manager), desc="Launch File Manager"),
+    ######### Screenshots #########
     Key([mod], "Print", lazy.spawn(screenshot), desc="Screenshot"),
     Key([], "Print", lazy.spawn(screenshot_gui), desc="Screenshot"),
+    ######### Media keys #########
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer sset Master 5%-"), desc="Lower Volume by 5%"),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer sset Master 5%+"), desc="Raise Volume by 5%"),
+    Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next track"),
+    Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous track"),
+    Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous track"),
+    Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Pause/Unpause"),
 ]
 
 #########################################
@@ -114,14 +122,14 @@ keys = [
 #########################################
 
 groups = [
-    Group("1", label="", matches=[], layout="columns"),
-    Group("2", label="󰈹", matches=[Match(wm_class="firefox")], layout="columns"),
-    Group("3", label="", matches=[Match(wm_class="Code,Anaconda-Navigator")], layout="columns"),
-    Group("4", label="󰭹", matches=[Match(wm_class="discord,steam")], layout="columns"),
-    Group("5", label="", matches=[Match(wm_class="nemo")], layout="columns"),
-    Group("6", label="󰋙", matches=[Match(wm_class="slippi")], layout="columns"),
-    Group("7", label="", matches=[Match(wm_class="obsidian")], layout="columns"),
-    Group("8", label="󰚀", matches=[Match(wm_class="qBittorrent,vial")], layout="columns"),
+    Group("1", label="󰈹", matches=[Match(wm_class="firefox")], layout="max"),
+    Group("2", label="", matches=[Match(wm_class="Code,Anaconda-Navigator")], layout="columns"),
+    Group("3", label="󰭹", matches=[Match(wm_class="discord,steam")], layout="columns"),
+    Group("4", label="󰋙", matches=[Match(wm_class="Slippi Launcher")], layout="max"),
+    Group("5", label="", matches=[Match(wm_class="obsidian")], layout="columns"),
+    Group("6", label="", matches=[Match(wm_class="nemo")], layout="columns"),
+    Group("7", label="󰚀", matches=[Match(wm_class="qBittorrent,Vial")], layout="columns"),
+    Group("8", label="", matches=[], layout="columns"),
 ]
 
 for i in groups:
@@ -134,16 +142,16 @@ for i in groups:
 
 groups.append(
     ScratchPad('scratchpad', [
-        DropDown('terminal', terminal),
-        DropDown('music', '/usr/bin/spotify-launcher'),
-        DropDown('mixer', 'pavucontrol'),
-        DropDown('pomodoro', 'pomatez'),
+        DropDown('terminal', terminal, on_focus_lost_hide=False),
+        DropDown('music', '/usr/bin/spotify-launcher', on_focus_lost_hide=False),
+        DropDown('mixer', 'pavucontrol', on_focus_lost_hide=False),
+        DropDown('pomodoro', 'pomatez', on_focus_lost_hide=False),
     ]))
 
 keys.extend([
     ########## Scratch pads #########
     Key([mod], "Return", lazy.group["scratchpad"].dropdown_toggle('terminal'), desc="Launch scratchpad terminal"),
-    Key([alt], "Return", lazy.group["scratchpad"].dropdown_toggle('music'), desc="Launch scratchpad music player"),
+    Key([mod], "s", lazy.group["scratchpad"].dropdown_toggle('music'), desc="Launch scratchpad music player"),
     Key([mod], "v", lazy.group["scratchpad"].dropdown_toggle('mixer'), desc="Launch scratchpad pavucontrol"),
     Key([mod], "p", lazy.group["scratchpad"].dropdown_toggle('pomodoro'), desc="Launch scratchpad pomodoro clock"),
 ])
