@@ -142,10 +142,10 @@ for i in groups:
 
 groups.append(
     ScratchPad('scratchpad', [
-        DropDown('terminal', terminal, on_focus_lost_hide=False),
-        DropDown('music', '/usr/bin/spotify-launcher', on_focus_lost_hide=False),
-        DropDown('mixer', 'pavucontrol', on_focus_lost_hide=False),
-        DropDown('pomodoro', 'pomatez', on_focus_lost_hide=False),
+        DropDown('terminal', terminal),
+        DropDown('music', '/usr/bin/spotify-launcher'),
+        DropDown('mixer', 'pavucontrol'),
+        DropDown('pomodoro', 'pomatez'),
     ]))
 
 keys.extend([
@@ -288,7 +288,7 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = True
 cursor_warp = True
 auto_fullscreen = True
