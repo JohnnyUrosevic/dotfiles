@@ -7,6 +7,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 export ZSH="$HOME/.oh-my-zsh"
+# Use different ZSH custom folder so we can use git submodules to track plugins
+export ZSH_CUSTOM="$HOME/.config/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -33,5 +35,8 @@ source $ZSH/oh-my-zsh.sh
 
 export MANGOHUD=1
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/lib/rustup/bin:$HOME/.local/bin:$PATH
+
+# make ctrl + backspace = delete word
+bindkey ^h backward-delete-word
 
 source ~/.alias
