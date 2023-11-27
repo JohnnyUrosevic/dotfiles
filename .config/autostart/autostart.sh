@@ -6,4 +6,6 @@ xset s -dpms
 xset s off
 nitrogen --restore
 /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
-redshift
+
+# Get automatic location for redshift
+redshift -l $(curl -s "https://location.services.mozilla.com/v1/geolocate?key=geoclue" | awk 'OFS=":" {print $3,$5}' | tr -d ',}')
