@@ -140,12 +140,13 @@ for i in groups:
         Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=False), desc="move focused window to group {}".format(i.name)),
     ])
 
-groups.append(ScratchPad('scratchpad', [
-    DropDown('terminal', terminal),
-    DropDown('music', 'spotify'),
-    DropDown('mixer', 'pavucontrol'),
-    DropDown('pomodoro', 'pomatez'),
-]))
+groups.append(
+    ScratchPad('scratchpad', [
+        DropDown('terminal', terminal, on_focus_lost_hide=False),
+        DropDown('music', 'spotify', on_focus_lost_hide=False),
+        DropDown('mixer', 'pavucontrol', on_focus_lost_hide=False),
+        DropDown('pomodoro', 'pomatez', on_focus_lost_hide=False),
+    ]))
 
 keys.extend([
     ########## Scratch pads #########
@@ -287,7 +288,7 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = False
+follow_mouse_focus = True
 bring_front_click = True
 cursor_warp = True
 auto_fullscreen = True
