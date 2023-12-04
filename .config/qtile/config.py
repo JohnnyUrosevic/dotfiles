@@ -124,8 +124,8 @@ keys = [
 groups = [
     Group("1", label="󰈹", matches=[Match(wm_class="firefox")], layout="max"),
     Group("2", label="", matches=[Match(wm_class="Code,Anaconda-Navigator")], layout="columns"),
-    Group("3", label="󰭹", matches=[Match(wm_class="discord,steam")], layout="columns"),
-    Group("4", label="󰋙", matches=[Match(wm_class="Slippi Launcher")], layout="max"),
+    Group("3", label="󰭹", matches=[Match(wm_class="discord")], layout="columns"),
+    Group("4", label="󰋙", matches=[Match(wm_class="Slippi Launcher,steam")], layout="max"),
     Group("5", label="", matches=[Match(wm_class="obsidian")], layout="columns"),
     Group("6", label="", matches=[Match(wm_class="nemo")], layout="columns"),
     Group("7", label="󰚀", matches=[Match(wm_class="qBittorrent,Vial")], layout="columns"),
