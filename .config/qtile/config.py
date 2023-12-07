@@ -121,21 +121,43 @@ keys = [
 ############# Groups/Workspaces #########
 #########################################
 
+
+class PinnedGroup(Group):
+
+    def __init__(self, *args, pinned_screen, **kwargs):
+        self.pinned_screen = pinned_screen
+        super().__init__(*args, **kwargs)
+
+
 groups = [
     Group("1", label="󰈹", matches=[Match(wm_class="firefox")], layout="max"),
     Group("2", label="", matches=[Match(wm_class="Code,Anaconda-Navigator")], layout="columns"),
-    Group("3", label="󰭹", matches=[Match(wm_class="discord")], layout="columns"),
-    Group("4", label="󰋙", matches=[Match(wm_class="Slippi Launcher,steam")], layout="max"),
+    PinnedGroup("3", label="󰭹", matches=[Match(wm_class="discord")], layout="columns", pinned_screen=1),
+    PinnedGroup("4", label="󰋙", matches=[Match(wm_class="Slippi Launcher,steam")], layout="max", pinned_screen=0),
     Group("5", label="", matches=[Match(wm_class="obsidian")], layout="columns"),
     Group("6", label="", matches=[Match(wm_class="nemo")], layout="columns"),
     Group("7", label="󰚀", matches=[Match(wm_class="qBittorrent,Vial")], layout="columns"),
     Group("8", label="", matches=[], layout="columns"),
 ]
 
+
+def go_to_group(g: Group):
+
+    def _inner(qtile):
+        if len(qtile.screens) == 1 or not hasattr(g, "pinned_screen"):
+            qtile.groups_map[g.name].toscreen()
+            return
+
+        qtile.focus_screen(g.pinned_screen)
+        qtile.groups_map[g.name].toscreen()
+
+    return _inner
+
+
 for i in groups:
     keys.extend([
         # mod1 + letter of group = switch to group
-        Key([mod], i.name, lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name)),
+        Key([mod], i.name, lazy.function(go_to_group(i)), desc="Switch to group {}".format(i.name)),
         # mod1 + shift + letter of group = move focused window to group
         Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=False), desc="move focused window to group {}".format(i.name)),
     ])
