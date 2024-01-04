@@ -1,11 +1,12 @@
 #!/bin/bash
 picom &
-xrandr -d DP-3 -s 1920x1080 -r 144
-xrandr -d HDMI-1 -s 1920x1080 -r 60
+xrandr --output DP-1 -s 2560x1440 -r 170 --auto
+xrandr --output DP-3 --right-of DP-1 -r 144 --auto
 xset s -dpms
 xset s off
-nitrogen --restore
+nitrogen --restore &
 /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 
 # Get automatic location for redshift
-redshift -l $(curl -s "https://location.services.mozilla.com/v1/geolocate?key=geoclue" | awk 'OFS=":" {print $3,$5}' | tr -d ',}')
+/usr/lib/geoclue-2.0/demos/agent &
+redshift
