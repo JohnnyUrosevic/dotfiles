@@ -31,7 +31,7 @@ def autostart():
 
 @hook.subscribe.group_window_add
 def switchtogroup(group, window):
-    if group.namestring != 'scratchpad':
+    if group.info()['name'] != 'scratchpad':
         group.cmd_toscreen()
 
 
@@ -126,18 +126,18 @@ class PinnedGroup(Group):
 
     def __init__(self, *args, pinned_screen, **kwargs):
         self.pinned_screen = pinned_screen
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, screen_affinity=pinned_screen, **kwargs)
 
 
 groups = [
     Group("1", label="󰈹", matches=[Match(wm_class="firefox")], layout="max"),
     Group("2", label="", matches=[Match(wm_class="Code,Anaconda-Navigator")], layout="columns"),
     PinnedGroup("3", label="󰭹", matches=[Match(wm_class="discord")], layout="columns", pinned_screen=1),
-    PinnedGroup("4", label="󰋙", matches=[Match(wm_class="Slippi Launcher,steam")], layout="max", pinned_screen=0),
-    Group("5", label="", matches=[Match(wm_class="obsidian")], layout="columns"),
-    Group("6", label="", matches=[Match(wm_class="nemo")], layout="columns"),
-    Group("7", label="󰚀", matches=[Match(wm_class="qBittorrent,Vial")], layout="columns"),
-    Group("8", label="", matches=[], layout="columns"),
+    PinnedGroup("4", label="󰋙", matches=[Match(wm_class="Slippi Launcher")], layout="max", pinned_screen=0),
+    Group("5", label="󰺵", matches=[Match(wm_class="steam")], layout="columns"),
+    Group("6", label="", matches=[Match(wm_class="obsidian")], layout="columns"),
+    Group("7", label="", matches=[Match(wm_class="nemo")], layout="columns"),
+    Group("8", label="󰚀", matches=[Match(wm_class="qBittorrent,Vial")], layout="columns"),
 ]
 
 
@@ -257,6 +257,7 @@ screens = [
                                 other_current_screen_border=gruv_mat["red"],
                                 background=gruvbox["dark-grey"],
                                 foreground=gruv_mat["disabled"],
+                                use_mouse_wheel=False,
                                 **arrow_powerlineLeft),
                 widget.TaskList(margin=0,
                                 padding=6,
