@@ -4,7 +4,7 @@ chosen=$(printf "Log Out\nSuspend\nRestart\nPower OFF" | rofi -dmenu -i -theme-s
 
 case "$chosen" in
 	"Log Out") killall qtile ;;
-	"Suspend") i3lock -i ~/Pictures/backgrounds/coffee.png && systemctl suspend ;;
+	"Suspend") i3lock -i ~/Pictures/Wallpapers/coffee.png && systemctl suspend ;;
 	"Restart") systemctl reboot ;;
 	"Power OFF") systemctl poweroff ;;
 	*) exit 1 ;;
