@@ -2,6 +2,7 @@
 ########## Importing Libreries ##########
 #########################################
 
+import re
 from libqtile import backend, bar, layout, widget, qtile, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
@@ -16,13 +17,14 @@ import subprocess
 from colors import gruv_mat
 from colors import gruvbox
 
+fullscreen_mode = False
+
 #########################################
 #############    hooks     ##############
 #########################################
 
+
 ########## Auto Start Programs ##########
-
-
 @hook.subscribe.startup_once
 def autostart():
     home = os.path.expanduser("~/.config/autostart/autostart.sh")
@@ -31,8 +33,8 @@ def autostart():
 
 @hook.subscribe.group_window_add
 def switchtogroup(group, window):
-    if group.info()['name'] != 'scratchpad':
-        group.cmd_toscreen()
+    if group.name != 'scratchpad':
+        go_to_group(group)
 
 
 #########################################
@@ -91,7 +93,7 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
     ######### Toggle Layout #########
-    Key([mod], "m", lazy.window.toggle_fullscreen(), desc="Toggle Full Screen"),
+    Key([alt], "Return", lazy.window.toggle_fullscreen(), desc="Toggle Full Screen"),
     Key([mod], "f", lazy.window.toggle_floating(), desc="Toggle Floating layout"),
     Key([mod, "shift"], "o", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
@@ -111,6 +113,7 @@ keys = [
     ######### Media keys #########
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer sset Master 5%-"), desc="Lower Volume by 5%"),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer sset Master 5%+"), desc="Raise Volume by 5%"),
+    Key([], "XF86AudioMute", lazy.spawn("amixer sset Master toggle"), desc="Mute"),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next track"),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous track"),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous track"),
@@ -131,13 +134,13 @@ class PinnedGroup(Group):
 
 groups = [
     Group("1", label="󰈹", matches=[Match(wm_class="firefox")], layout="max"),
-    Group("2", label="", matches=[Match(wm_class="Code,Anaconda-Navigator")], layout="columns"),
+    Group("2", label="", matches=[Match(wm_class="Code")], layout="columns"),
     PinnedGroup("3", label="󰭹", matches=[Match(wm_class="discord")], layout="columns", pinned_screen=1),
     PinnedGroup("4", label="󰋙", matches=[Match(wm_class="Slippi Launcher")], layout="max", pinned_screen=0),
-    Group("5", label="󰺵", matches=[Match(wm_class="steam")], layout="columns"),
+    PinnedGroup("5", label="󰺵", matches=[Match(wm_class=re.compile(r"steam.*|league.*"))], layout="columns", pinned_screen=0),
     Group("6", label="", matches=[Match(wm_class="obsidian")], layout="columns"),
     Group("7", label="", matches=[Match(wm_class="nemo")], layout="columns"),
-    Group("8", label="󰚀", matches=[Match(wm_class="qBittorrent,Vial")], layout="columns"),
+    Group("8", label="󰚀", matches=[Match(wm_class=re.compile(r"qBittorrent|via.*"))], layout="columns"),
 ]
 
 
@@ -311,7 +314,7 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = True
 cursor_warp = True
 auto_fullscreen = True
