@@ -37,6 +37,16 @@ def switchtogroup(group, window):
         go_to_group(group)
 
 
+@hook.subscribe.float_change
+def checkforfullscreen():
+    global fullscreen_mode
+    fullscreen_mode = qtile.current_window.fullscreen
+    if fullscreen_mode:
+        qtile.current_window.togroup('fullscreen', switch_group=False)
+        qtile.focus_screen(0)
+        qtile.groups_map['fullscreen'].toscreen()
+
+
 #########################################
 ######### Shortcut Variables ############
 #########################################
@@ -116,7 +126,6 @@ keys = [
     Key([], "XF86AudioMute", lazy.spawn("amixer sset Master toggle"), desc="Mute"),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next track"),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous track"),
-    Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous track"),
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Pause/Unpause"),
 ]
 
@@ -137,7 +146,7 @@ groups = [
     Group("2", label="", matches=[Match(wm_class="Code")], layout="columns"),
     PinnedGroup("3", label="󰭹", matches=[Match(wm_class="discord")], layout="columns", pinned_screen=1),
     PinnedGroup("4", label="󰋙", matches=[Match(wm_class="Slippi Launcher")], layout="max", pinned_screen=0),
-    PinnedGroup("5", label="󰺵", matches=[Match(wm_class=re.compile(r"steam.*|league.*"))], layout="columns", pinned_screen=0),
+    PinnedGroup("5", label="󰓓", matches=[Match(wm_class=re.compile(r"steam.*|league.*"))], layout="columns", pinned_screen=0),
     Group("6", label="", matches=[Match(wm_class="obsidian")], layout="columns"),
     Group("7", label="", matches=[Match(wm_class="nemo")], layout="columns"),
     Group("8", label="󰚀", matches=[Match(wm_class=re.compile(r"qBittorrent|via.*"))], layout="columns"),
@@ -146,15 +155,20 @@ groups = [
 
 def go_to_group(g: Group):
 
-    def _inner(qtile):
-        if len(qtile.screens) == 1 or not hasattr(g, "pinned_screen"):
+    def callback(qtile):
+        if len(qtile.screens) == 1 or (not fullscreen_mode and not hasattr(g, "pinned_screen")):
+            qtile.groups_map[g.name].toscreen()
+            return
+
+        if fullscreen_mode and g.name != 'fullscreen':
+            qtile.focus_screen(1)
             qtile.groups_map[g.name].toscreen()
             return
 
         qtile.focus_screen(g.pinned_screen)
         qtile.groups_map[g.name].toscreen()
 
-    return _inner
+    return callback
 
 
 for i in groups:
@@ -180,6 +194,10 @@ keys.extend([
     Key([mod], "v", lazy.group["scratchpad"].dropdown_toggle('mixer'), desc="Launch scratchpad pavucontrol"),
     Key([mod], "p", lazy.group["scratchpad"].dropdown_toggle('pomodoro'), desc="Launch scratchpad pomodoro clock"),
 ])
+
+# Fullscreen
+groups.append(PinnedGroup('fullscreen', label='󰺵', layout='max', pinned_screen=0))
+keys.append(Key([mod], 'g', lazy.function(go_to_group(groups[-1]))))
 #########################################
 ############# Window Layouts ###########
 #########################################
