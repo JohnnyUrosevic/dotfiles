@@ -230,6 +230,8 @@ floating_layout = layout.Floating(
         Match(wm_class="splash"),
         Match(wm_class="toolbar"),
         Match(wm_class="download"),
+        Match(wm_class="steam", title=re.compile(r"^Steam.+$")),
+        Match(wm_class="steam", title="Friends List"),
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
     ],
