@@ -7,6 +7,7 @@ from libqtile import backend, bar, layout, widget, qtile, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from libqtile.log_utils import logger
 
 from qtile_extras import widget
 from qtile_extras.widget.decorations import PowerLineDecoration
@@ -33,8 +34,9 @@ def autostart():
 
 @hook.subscribe.group_window_add
 def switchtogroup(group, window):
-    if group.name != 'scratchpad':
-        go_to_group(group)
+    name = group.info()['name']
+    if name != 'scratchpad':
+        go_to_group(qtile.groups_map[name])(qtile)
 
 
 @hook.subscribe.float_change
