@@ -80,6 +80,16 @@ lock = "betterlockscreen -l dimblur"
 ############# key Bindings ##############
 #########################################
 
+
+def move_to_next_screen(qtile, direction=1):
+    current_group = qtile.current_screen.group
+    other_index = (qtile.screens.index(qtile.current_screen) + direction) % len(qtile.screens)
+    other = qtile.screens[other_index].group
+    qtile.current_window.togroup(other.name)
+    # because of our hook we have to explicity switch back to old group
+    current_group.toscreen()
+
+
 keys = [
     ######### Switch between windows #########
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -88,13 +98,15 @@ keys = [
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "period", lazy.next_screen(), desc="Move focus between monitors"),
     ######### Toggling Between Active Groups #########
-    Key([mod], "Tab", lazy.screen.next_group(skip_empty=True), desc="Toggel next active group"),
-    Key([alt], "Tab", lazy.screen.prev_group(skip_empty=True), desc="Toggel previous active group"),
+    Key([mod], "Tab", lazy.screen.next_group(skip_empty=True), desc="Toggle next active group"),
+    Key([alt], "Tab", lazy.screen.prev_group(skip_empty=True), desc="Toggle previous active group"),
     ######### Moving windows #########
     Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
     Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
+    Key([mod], "comma", lazy.function(move_to_next_screen)),
+    Key([mod, "shift"], "comma", lazy.function(move_to_next_screen, -1)),
     ######### Resizing windows #########
     Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
     Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
@@ -158,7 +170,7 @@ groups = [
 def go_to_group(g: Group):
 
     def callback(qtile):
-        if len(qtile.screens) == 1 or (not fullscreen_mode and not hasattr(g, "pinned_screen")):
+        if len(qtile.screens) == 1 or (not fullscreen_mode and not g.screen_affinity):
             qtile.groups_map[g.name].toscreen()
             return
 
@@ -167,7 +179,7 @@ def go_to_group(g: Group):
             qtile.groups_map[g.name].toscreen()
             return
 
-        qtile.focus_screen(g.pinned_screen)
+        qtile.focus_screen(g.screen_affinity)
         qtile.groups_map[g.name].toscreen()
 
     return callback
@@ -197,9 +209,19 @@ keys.extend([
     Key([mod], "p", lazy.group["scratchpad"].dropdown_toggle('pomodoro'), desc="Launch scratchpad pomodoro clock"),
 ])
 
+
+def enter_fullscreen():
+    global fullscreen_mode
+    fullscreen_mode = True
+    qtile.current_window.togroup('fullscreen', switch_group=False)
+    qtile.focus_screen(0)
+    qtile.groups_map['fullscreen'].toscreen()
+
+
 # Fullscreen
 groups.append(PinnedGroup('fullscreen', label='󰺵', layout='max', pinned_screen=0))
 keys.append(Key([mod], 'g', lazy.function(go_to_group(groups[-1]))))
+keys.append(Key([mod, "shift"], 'g', lazy.window.togroup('fullscreen', switch_group=False)))
 #########################################
 ############# Window Layouts ###########
 #########################################
