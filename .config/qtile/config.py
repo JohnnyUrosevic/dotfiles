@@ -43,7 +43,7 @@ def switchtogroup(group, window):
 def checkforfullscreen():
     global fullscreen_mode
     fullscreen_mode = qtile.current_window.fullscreen
-    if fullscreen_mode:
+    if fullscreen_mode and not ('firefox' in qtile.current_window.get_wm_class()):
         qtile.current_window.togroup('fullscreen', switch_group=False)
         qtile.focus_screen(0)
         qtile.groups_map['fullscreen'].toscreen()
