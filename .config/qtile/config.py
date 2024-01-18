@@ -39,14 +39,30 @@ def switchtogroup(group, window):
         go_to_group(qtile.groups_map[name])(qtile)
 
 
+def enter_fullscreen(qtile):
+    global fullscreen_mode
+    fullscreen_mode = True
+    qtile.current_window.togroup('fullscreen', switch_group=False)
+    qtile.focus_screen(0)
+    qtile.groups_map['fullscreen'].toscreen()
+
+    qtile.config.update(follow_mouse_focus=False)
+
+
+def exit_fullscreen(qtile):
+    global fullscreen_mode
+    fullscreen_mode = False
+    qtile.config.update(follow_mouse_focus=True)
+
+
 @hook.subscribe.float_change
 def checkforfullscreen():
     global fullscreen_mode
-    fullscreen_mode = qtile.current_window.fullscreen
-    if fullscreen_mode and not ('firefox' in qtile.current_window.get_wm_class()):
-        qtile.current_window.togroup('fullscreen', switch_group=False)
-        qtile.focus_screen(0)
-        qtile.groups_map['fullscreen'].toscreen()
+    global follow_mouse_focus
+    if qtile.current_window.fullscreen and not ('firefox' in qtile.current_window.get_wm_class()):
+        enter_fullscreen(qtile)
+    else:
+        exit_fullscreen(qtile)
 
 
 #########################################
@@ -112,7 +128,7 @@ keys = [
     Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([mod, "shift"], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     ######### Actions ##########
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
@@ -199,6 +215,7 @@ groups.append(
         DropDown('music', 'spotify', on_focus_lost_hide=False),
         DropDown('mixer', 'pavucontrol', on_focus_lost_hide=False),
         DropDown('pomodoro', 'pomatez', on_focus_lost_hide=False),
+        DropDown('system-monitor', 'gnome-system-monitor', on_focus_lost_hide=False),
     ]))
 
 keys.extend([
@@ -207,21 +224,14 @@ keys.extend([
     Key([mod], "s", lazy.group["scratchpad"].dropdown_toggle('music'), desc="Launch scratchpad music player"),
     Key([mod], "v", lazy.group["scratchpad"].dropdown_toggle('mixer'), desc="Launch scratchpad pavucontrol"),
     Key([mod], "p", lazy.group["scratchpad"].dropdown_toggle('pomodoro'), desc="Launch scratchpad pomodoro clock"),
+    Key(["control", "shift"], "escape", lazy.group["scratchpad"].dropdown_toggle('system-monitor'), desc="Launch scratchpad system monitor"),
 ])
-
-
-def enter_fullscreen():
-    global fullscreen_mode
-    fullscreen_mode = True
-    qtile.current_window.togroup('fullscreen', switch_group=False)
-    qtile.focus_screen(0)
-    qtile.groups_map['fullscreen'].toscreen()
-
 
 # Fullscreen
 groups.append(PinnedGroup('fullscreen', label='󰺵', layout='max', pinned_screen=0))
 keys.append(Key([mod], 'g', lazy.function(go_to_group(groups[-1]))))
-keys.append(Key([mod, "shift"], 'g', lazy.window.togroup('fullscreen', switch_group=False)))
+keys.append(Key([mod, "shift"], 'g', lazy.function(enter_fullscreen)))
+keys.append(Key([alt, "shift"], 'g', lazy.function(exit_fullscreen)))
 #########################################
 ############# Window Layouts ###########
 #########################################
@@ -358,11 +368,11 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = False
+follow_mouse_focus = True
 bring_front_click = True
 cursor_warp = True
 auto_fullscreen = True
-focus_on_window_activation = "never"
+focus_on_window_activation = "smart"
 reconfigure_screens = True
 auto_minimize = True
 wmname = "LG3D"
