@@ -347,14 +347,20 @@ widgets = [
 
 size = 30
 
-screen_configurations = dict(
+bar_configurations = dict(
     margin=[6, 10, 6, 10],
     border_width=[0, 0, 0, 0],
     background=gruv_mat["dark"],
 )
 
+screen_configurations = dict(
+    wallpaper="~/Pictures/Wallpapers/dragon-ball-goku-gohan.png",
+    wallpaper_mode="fill",
+)
+
 screens = [
-    Screen(top=bar.Bar(widgets, size, **screen_configurations)),
+    Screen(top=bar.Bar(widgets, size, **bar_configurations), **screen_configurations),
+    Screen(**screen_configurations),
 ]
 
 #########################################
