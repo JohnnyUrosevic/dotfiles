@@ -86,6 +86,7 @@ app_launcher = 'zsh -c "rofi -show drun -disable-history -show-icons"'
 # make cmd launcher respect alisas
 cmd_launcher = 'rofi -run-list-command \". ~/.alias\" -run-command \"/usr/bin/zsh -i -c \'{cmd}\'\" -show run -disable-history'
 win_launcher = 'zsh -c "rofi -show window -show-icons"'
+clipcat_launcher = 'clipcat-menu'
 browser = "firefox"
 file_manager = "nemo"
 screenshot = "flameshot full"
@@ -141,6 +142,8 @@ keys = [
     Key([mod], "space", lazy.spawn(app_launcher), desc="Launch Rofi drun"),
     Key([alt], "space", lazy.spawn(cmd_launcher), desc="Launch Rofi run"),
     Key([alt], "w", lazy.spawn(win_launcher), desc="Launch Rofi Windows"),
+    ######### Clipcat #########
+    Key([mod], "c", lazy.spawn(clipcat_launcher), desc="Launch Rofi clipcat"),
     ######### Power and Lockscreen #########
     Key([mod, "shift"], "e", lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/power.sh")), desc="Rofi Power Menu"),
     Key([mod, "shift"], "x", lazy.spawn(lock), desc="Betterlockscreen"),
