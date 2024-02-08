@@ -6,5 +6,4 @@ alias vi=vim
 alias please='sudo $(fc -ln -1)'
 alias slippi='mangohud gamemoderun slippi'
 alias cat=bat
-alias cd=z
 
