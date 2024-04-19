@@ -19,6 +19,7 @@ from colors import gruv_mat
 from colors import gruvbox
 
 fullscreen_mode = False
+fullscreen_window = None
 
 #########################################
 #############    hooks     ##############
@@ -39,10 +40,14 @@ def switchtogroup(group, window):
         go_to_group(qtile.groups_map[name])(qtile)
 
 
-def enter_fullscreen(qtile):
+def enter_fullscreen(qtile, window, group):
     global fullscreen_mode
+    global fullscreen_window
+
     fullscreen_mode = True
-    qtile.current_window.togroup('fullscreen', switch_group=False)
+    fullscreen_window = (window, group)
+
+    qtile.windows_map[window].togroup('fullscreen', switch_group=False)
     qtile.focus_screen(0)
     qtile.groups_map['fullscreen'].toscreen()
 
@@ -51,18 +56,46 @@ def enter_fullscreen(qtile):
 
 def exit_fullscreen(qtile):
     global fullscreen_mode
+    global fullscreen_window
+
     fullscreen_mode = False
+
+    window, home = fullscreen_window
+
+    if window in [info['id'] for info in qtile.windows()]:
+        qtile.windows_map[window].togroup(home)
+
+    fullscreen_window = None
     qtile.config.update(follow_mouse_focus=True)
+
+
+def fullscreen_window_exists(qtile):
+    for info in qtile.windows():
+        if info['fullscreen']:
+            return True, info['id'], info['group']
+
+    return False, None, None
 
 
 @hook.subscribe.float_change
 def checkforfullscreen():
     global fullscreen_mode
-    global follow_mouse_focus
-    if qtile.current_window.fullscreen and not ('firefox' in qtile.current_window.get_wm_class()):
-        enter_fullscreen(qtile)
+    # not ('firefox' in qtile.current_window.get_wm_class())
+    res, window, group = fullscreen_window_exists(qtile)
+    if res:
+        enter_fullscreen(qtile, window, group)
     else:
         exit_fullscreen(qtile)
+
+
+@hook.subscribe.client_killed
+def client_killed(window):
+    checkforfullscreen()
+
+
+@hook.subscribe.client_new
+def new_client(window):
+    checkforfullscreen()
 
 
 #########################################
