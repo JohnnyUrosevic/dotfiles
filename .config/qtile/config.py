@@ -114,7 +114,7 @@ rounded_powerlineLeft = {"decorations": [PowerLineDecoration(path="rouded_left",
 slash_powerlineRight = {"decorations": [PowerLineDecoration(path="forward_slash", size=11)]}
 slash_powerlineLeft = {"decorations": [PowerLineDecoration(path="back_slash", size=11)]}
 ######## Applicaton Variables ###########
-terminal = guess_terminal()
+terminal = 'kitty'
 app_launcher = 'zsh -c "rofi -show drun -disable-history -show-icons"'
 # make cmd launcher respect alisas
 cmd_launcher = 'rofi -run-list-command \". ~/.alias\" -run-command \"/usr/bin/zsh -i -c \'{cmd}\'\" -show run -disable-history'
@@ -245,13 +245,19 @@ for i in groups:
         Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=False), desc="move focused window to group {}".format(i.name)),
     ])
 
+dropdown_config = dict(
+    on_focus_lost_hide=False,
+    y=0.25,
+    height=0.5,
+)
+
 groups.append(
     ScratchPad('scratchpad', [
-        DropDown('terminal', terminal, on_focus_lost_hide=False),
-        DropDown('music', 'spotify', on_focus_lost_hide=False),
-        DropDown('mixer', 'pavucontrol', on_focus_lost_hide=False),
-        DropDown('pomodoro', 'pomatez', on_focus_lost_hide=False),
-        DropDown('system-monitor', 'gnome-system-monitor', on_focus_lost_hide=False),
+        DropDown('terminal', terminal, **dropdown_config),
+        DropDown('music', 'spotify', **dropdown_config),
+        DropDown('mixer', 'pavucontrol', **dropdown_config),
+        DropDown('pomodoro', 'pomatez', **dropdown_config),
+        DropDown('system-monitor', 'gnome-system-monitor', **dropdown_config),
     ]))
 
 keys.extend([
@@ -264,7 +270,7 @@ keys.extend([
 ])
 
 # Fullscreen
-groups.append(PinnedGroup('fullscreen', label='󰺵', layout='max', pinned_screen=0))
+groups.append(PinnedGroup('fullscreen', label='󰺵', layout='max', pinned_screen=0, persist=False))
 keys.append(Key([mod], 'g', lazy.function(go_to_group(groups[-1]))))
 keys.append(Key([mod, "shift"], 'g', lazy.function(enter_fullscreen)))
 keys.append(Key([alt, "shift"], 'g', lazy.function(exit_fullscreen)))
