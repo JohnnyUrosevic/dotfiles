@@ -39,4 +39,12 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/bin/site_perl:/usr
 # make ctrl + backspace = delete word
 bindkey ^h backward-delete-word
 
+# Enable dark themes
+export GTK_THEME=Adwaita:dark
+export GTK2_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
+export QT_STYLE_OVERRIDE=adwaita-dark
+
 source ~/.alias
+autoload bashcompinit
+bashcompinit
+source "/home/goose/.local/share/bash-completion/completions/am"
