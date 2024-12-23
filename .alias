@@ -6,4 +6,5 @@ alias vi=vim
 alias please='sudo $(fc -ln -1)'
 alias slippi='mangohud gamemoderun slippi'
 alias cat=bat
+alias dotgit='lazygit -ucd ~/.local/share/yadm/lazygit -w ~ -g ~/.local/share/yadm/repo.git'
 
