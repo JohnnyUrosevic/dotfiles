@@ -1,10 +1,10 @@
 #!/bin/bash
 picom &
 
-xrandr --output DP-1 -s 2560x1440 -r 170 --auto
-xrandr --output DP-3 --right-of DP-1 -r 144 --auto
 xset s -dpms
 xset s off
+
+qtile cmd-obj -o cmd -f reload_config
 
 /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 
@@ -15,3 +15,6 @@ clipcatd &
 redshift &
 
 discord &
+steam-runtime &
+
+seventeenlands &
