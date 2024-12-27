@@ -1,3 +1,9 @@
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+esac
+
 fortune | cowsay -f moose
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -24,9 +30,12 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   git-open
-  zsh-archlinux
   z
 )
+
+if [[ $machine = "Linux" ]]; then
+  plugins+=('zsh-archlinux')
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -47,4 +56,3 @@ export QT_STYLE_OVERRIDE=adwaita-dark
 source ~/.alias
 autoload bashcompinit
 bashcompinit
-source "/home/goose/.local/share/bash-completion/completions/am"
