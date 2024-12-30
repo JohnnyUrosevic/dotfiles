@@ -209,7 +209,7 @@ class PinnedGroup(Group):
 
 groups = [
     Group("1", label="󰈹", matches=[Match(wm_class="firefox")], layout="max"),
-    Group("2", label="", matches=[Match(wm_class="Code")], layout="columns"),
+    Group("2", label="", matches=[Match(wm_class=re.compile("(Code)|(kitty)"))], layout="columns"),
     PinnedGroup("3", label="󰭹", matches=[Match(wm_class="discord")], layout="columns", pinned_screen=1),
     PinnedGroup("4", label="󰋙", matches=[Match(wm_class="Slippi Launcher")], layout="max", pinned_screen=0),
     PinnedGroup("5", label="󰓓", matches=[Match(wm_class=re.compile(r"steam.*|league.*"))], layout="columns", pinned_screen=0),
@@ -247,7 +247,7 @@ for i in groups:
 
 dropdown_config = dict(
     on_focus_lost_hide=False,
-    y=0.25,
+    y=0.20,
     height=0.5,
 )
 
