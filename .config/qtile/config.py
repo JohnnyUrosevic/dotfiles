@@ -119,6 +119,7 @@ app_launcher = 'zsh -c "rofi -show drun -disable-history -show-icons"'
 # make cmd launcher respect alisas
 cmd_launcher = 'rofi -run-list-command \". ~/.alias\" -run-command \"/usr/bin/zsh -i -c \'{cmd}\'\" -show run -disable-history'
 win_launcher = 'zsh -c "rofi -show window -show-icons"'
+calc_launcher = 'rofi -show calc -modi calc -no-show-match -no-sort'
 clipcat_launcher = 'clipcat-menu'
 browser = "firefox"
 file_manager = "nemo"
@@ -175,8 +176,9 @@ keys = [
     Key([mod], "space", lazy.spawn(app_launcher), desc="Launch Rofi drun"),
     Key([alt], "space", lazy.spawn(cmd_launcher), desc="Launch Rofi run"),
     Key([alt], "w", lazy.spawn(win_launcher), desc="Launch Rofi Windows"),
+    Key([mod], "c", lazy.spawn(calc_launcher), desc="Launch Rofi Qalc"),
     ######### Clipcat #########
-    Key([mod], "c", lazy.spawn(clipcat_launcher), desc="Launch Rofi clipcat"),
+    Key([alt], "c", lazy.spawn(clipcat_launcher), desc="Launch Rofi clipcat"),
     ######### Power and Lockscreen #########
     Key([mod, "shift"], "e", lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/power.sh")), desc="Rofi Power Menu"),
     Key([mod, "shift"], "x", lazy.spawn(lock), desc="Betterlockscreen"),
@@ -270,7 +272,7 @@ keys.extend([
 ])
 
 # Fullscreen
-groups.append(PinnedGroup('fullscreen', label='󰺵', layout='max', pinned_screen=0, persist=False))
+groups.append(PinnedGroup('fullscreen', label='󰺵', layout='max', pinned_screen=0, persist=True))
 keys.append(Key([mod], 'g', lazy.function(go_to_group(groups[-1]))))
 keys.append(Key([mod, "shift"], 'g', lazy.function(enter_fullscreen)))
 keys.append(Key([alt, "shift"], 'g', lazy.function(exit_fullscreen)))
@@ -387,7 +389,71 @@ widgets = [
     widget.CurrentLayoutIcon(padding=5, scale=0.5),
 ]
 
-size = 30
+widgets_2=[
+    #########################
+    # Widget Configurations #
+    #########################
+    widget.Image(filename="~/.config/qtile/imgs/arch.png", mouse_callbacks={
+                 "Button1": open_rofi}, background=gruvbox["yellow"], margin=3),
+    widget.Spacer(
+        length=1, background=gruvbox["yellow"], **arrow_powerlineLeft),
+    widget.GroupBox(font="FiraCode Nerd Font Mono",
+                    fontsize=27,
+                    padding_x=3,
+                    padding_y=5,
+                    rounded=False,
+                    center_aligned=True,
+                    disable_drag=True,
+                    borderwidth=3,
+                    highlight_method="line",
+                    active=gruvbox["cream"],
+                    inactive=gruvbox["blue-alt"],
+                    highlight_color=gruvbox["dark-grey"],
+                    this_current_screen_border=gruvbox["yellow"],
+                    this_screen_border=gruv_mat["disabled"],
+                    other_screen_border=gruv_mat["red"],
+                    other_current_screen_border=gruv_mat["red"],
+                    background=gruvbox["dark-grey"],
+                    foreground=gruv_mat["disabled"],
+                    use_mouse_wheel=False,
+                    **arrow_powerlineLeft),
+    widget.TaskList(margin=0,
+                    padding=6,
+                    icon_size=0,
+                    fontsize=14,
+                    borderwidth=1,
+                    rounded=False,
+                    highlight_method="block",
+                    title_width_method="uniform",
+                    urgent_alert_methond="border",
+                    foreground=gruv_mat["black"],
+                    background=gruvbox["cream"],
+                    border=gruvbox["cream"],
+                    urgent_border=gruv_mat["red-alt"],
+                    txt_floating=" ",
+                    txt_maximized=" ",
+                    txt_minimized=" "),
+    widget.Spacer(
+        length=1, background=gruvbox["cream"], **rounded_powerlineRight),
+    widget.CPU(padding=5, format="  {freq_current}GHz {load_percent}%",
+               foreground=gruvbox["cream"], background=gruvbox["dark-grey"], **slash_powerlineRight),
+    widget.ThermalSensor(padding=5,
+                         update_interval=1,
+                         format="󰔐 {temp:.0f}{unit}",
+                         tag_sensor="Tctl",
+                         foreground=gruvbox["cream"],
+                         background=gruvbox["blue-alt"],
+                         **slash_powerlineRight),
+    widget.Memory(padding=5, format="󰈀 {MemUsed:.0f}{mm}",
+                  background=gruvbox["cream"], foreground=gruvbox["dark-grey"], **slash_powerlineRight),
+    widget.Clock(padding=5, format="  %a %d %b %I:%M:%S",
+                 foreground=gruvbox["yellow"], background=gruvbox["dark-grey"], **slash_powerlineRight),
+    widget.PulseVolume(
+        fmt="󰕾 {}", foreground=gruvbox["dark"], background=gruvbox["yellow"], padding=10, **slash_powerlineRight),
+    widget.Systray(padding=7, icon_size=15),
+    widget.CurrentLayoutIcon(padding=5, scale=0.5),
+]
+size=30
 
 bar_configurations = dict(
     margin=[6, 10, 6, 10],
@@ -400,9 +466,11 @@ screen_configurations = dict(
     wallpaper_mode="fill",
 )
 
-screens = [
-    Screen(top=bar.Bar(widgets, size, **bar_configurations), **screen_configurations),
-    Screen(**screen_configurations),
+screens=[
+    Screen(top=bar.Bar(widgets, size, **bar_configurations),
+           **screen_configurations),
+    Screen(top=bar.Bar(widgets_2, size, **bar_configurations),
+           **screen_configurations),
 ]
 
 #########################################
