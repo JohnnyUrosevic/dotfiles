@@ -2,7 +2,7 @@
 alias sudo="nocorrect sudo"
 alias yay=paru
 alias ls="ls -a"
-alias vi=vim
+alias vim=nvim
 alias please='sudo $(fc -ln -1)'
 alias slippi='mangohud gamemoderun slippi'
 alias cat=bat
