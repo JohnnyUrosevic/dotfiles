@@ -56,3 +56,8 @@ export QT_STYLE_OVERRIDE=adwaita-dark
 source ~/.alias
 autoload bashcompinit
 bashcompinit
+
+DEVKITPRO=/opt/devkitpro
+DEVKITARM=/opt/devkitpro/devkitARM
+DEVKITPPC=/opt/devkitpro/devkitPPC
+
