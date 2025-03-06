@@ -57,7 +57,8 @@ source ~/.alias
 autoload bashcompinit
 bashcompinit
 
-DEVKITPRO=/opt/devkitpro
-DEVKITARM=/opt/devkitpro/devkitARM
-DEVKITPPC=/opt/devkitpro/devkitPPC
+export DEVKITPRO=/opt/devkitpro
+export DEVKITARM=/opt/devkitpro/devkitARM
+export DEVKITPPC=/opt/devkitpro/devkitPPC
 
+export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/qt6/plugins/platforms #fix for slippi
