@@ -215,7 +215,7 @@ groups = [
     PinnedGroup("3", label="󰭹", matches=[Match(wm_class="discord")], layout="columns", pinned_screen=1),
     PinnedGroup("4", label="󰋙", matches=[Match(wm_class="Slippi Launcher")], layout="max", pinned_screen=0),
     PinnedGroup("5", label="󰓓", matches=[Match(wm_class=re.compile(r"steam.*|league.*"))], layout="columns", pinned_screen=0),
-    Group("6", label="", matches=[Match(wm_class="obsidian")], layout="columns"),
+    Group("6", label="", matches=[Match(wm_class="obsidian")], layout="max"),
     Group("7", label="", matches=[Match(wm_class="nemo")], layout="columns"),
     PinnedGroup("8", label="󰚀", matches=[Match(wm_class=re.compile(r"qBittorrent|via.*"))], layout="columns", pinned_screen=0),
 ]
@@ -389,14 +389,12 @@ widgets = [
     widget.CurrentLayoutIcon(padding=5, scale=0.5),
 ]
 
-widgets_2=[
+widgets_2 = [
     #########################
     # Widget Configurations #
     #########################
-    widget.Image(filename="~/.config/qtile/imgs/arch.png", mouse_callbacks={
-                 "Button1": open_rofi}, background=gruvbox["yellow"], margin=3),
-    widget.Spacer(
-        length=1, background=gruvbox["yellow"], **arrow_powerlineLeft),
+    widget.Image(filename="~/.config/qtile/imgs/arch.png", mouse_callbacks={"Button1": open_rofi}, background=gruvbox["yellow"], margin=3),
+    widget.Spacer(length=1, background=gruvbox["yellow"], **arrow_powerlineLeft),
     widget.GroupBox(font="FiraCode Nerd Font Mono",
                     fontsize=27,
                     padding_x=3,
@@ -433,10 +431,8 @@ widgets_2=[
                     txt_floating=" ",
                     txt_maximized=" ",
                     txt_minimized=" "),
-    widget.Spacer(
-        length=1, background=gruvbox["cream"], **rounded_powerlineRight),
-    widget.CPU(padding=5, format="  {freq_current}GHz {load_percent}%",
-               foreground=gruvbox["cream"], background=gruvbox["dark-grey"], **slash_powerlineRight),
+    widget.Spacer(length=1, background=gruvbox["cream"], **rounded_powerlineRight),
+    widget.CPU(padding=5, format="  {freq_current}GHz {load_percent}%", foreground=gruvbox["cream"], background=gruvbox["dark-grey"], **slash_powerlineRight),
     widget.ThermalSensor(padding=5,
                          update_interval=1,
                          format="󰔐 {temp:.0f}{unit}",
@@ -444,16 +440,13 @@ widgets_2=[
                          foreground=gruvbox["cream"],
                          background=gruvbox["blue-alt"],
                          **slash_powerlineRight),
-    widget.Memory(padding=5, format="󰈀 {MemUsed:.0f}{mm}",
-                  background=gruvbox["cream"], foreground=gruvbox["dark-grey"], **slash_powerlineRight),
-    widget.Clock(padding=5, format="  %a %d %b %I:%M:%S",
-                 foreground=gruvbox["yellow"], background=gruvbox["dark-grey"], **slash_powerlineRight),
-    widget.PulseVolume(
-        fmt="󰕾 {}", foreground=gruvbox["dark"], background=gruvbox["yellow"], padding=10, **slash_powerlineRight),
+    widget.Memory(padding=5, format="󰈀 {MemUsed:.0f}{mm}", background=gruvbox["cream"], foreground=gruvbox["dark-grey"], **slash_powerlineRight),
+    widget.Clock(padding=5, format="  %a %d %b %I:%M:%S", foreground=gruvbox["yellow"], background=gruvbox["dark-grey"], **slash_powerlineRight),
+    widget.PulseVolume(fmt="󰕾 {}", foreground=gruvbox["dark"], background=gruvbox["yellow"], padding=10, **slash_powerlineRight),
     widget.Systray(padding=7, icon_size=15),
     widget.CurrentLayoutIcon(padding=5, scale=0.5),
 ]
-size=30
+size = 30
 
 bar_configurations = dict(
     margin=[6, 10, 6, 10],
@@ -466,11 +459,9 @@ screen_configurations = dict(
     wallpaper_mode="fill",
 )
 
-screens=[
-    Screen(top=bar.Bar(widgets, size, **bar_configurations),
-           **screen_configurations),
-    Screen(top=bar.Bar(widgets_2, size, **bar_configurations),
-           **screen_configurations),
+screens = [
+    Screen(top=bar.Bar(widgets, size, **bar_configurations), **screen_configurations),
+    Screen(top=bar.Bar(widgets_2, size, **bar_configurations), **screen_configurations),
 ]
 
 #########################################
