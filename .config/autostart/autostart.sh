@@ -15,7 +15,7 @@ clipcatd &
 redshift &
 
 discord &
-steam-runtime &
+steam &
 kitty &
 
 seventeenlands &
