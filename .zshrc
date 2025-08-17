@@ -30,7 +30,6 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   git-open
-  z
 )
 
 if [[ $machine = "Linux" ]]; then
@@ -64,3 +63,5 @@ export DEVKITPPC=/opt/devkitpro/devkitPPC
 export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/qt6/plugins/platforms #fix for slippi
 
 export EDITOR=nvim
+
+eval "$(zoxide init --cmd cd zsh)"
