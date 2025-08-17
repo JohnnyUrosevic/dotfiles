@@ -179,7 +179,7 @@ wine-lol-bin
 winetricks
 wireless_tools
 wireplumber
-wlroots
+wlroots0.18
 wpa_supplicant
 wpgtk-git
 xcolor
@@ -225,6 +225,7 @@ yarn
 yin-yang-git
 zen-browser-bin
 zig
+zoxide
 zram-generator
 zsh
 zsync
