@@ -10,9 +10,7 @@ qtile cmd-obj -o cmd -f reload_config
 
 clipcatd &
 
-# Get automatic location for redshift
-/usr/lib/geoclue-2.0/demos/agent &
-redshift &
+redshift -l '34.05:-118.15' -t '6500:2500' &
 
 discord &
 steam &
