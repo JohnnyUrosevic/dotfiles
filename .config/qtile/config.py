@@ -121,7 +121,7 @@ cmd_launcher = 'rofi -run-list-command \". ~/.alias\" -run-command \"/usr/bin/zs
 win_launcher = 'zsh -c "rofi -show window -show-icons"'
 calc_launcher = 'rofi -show calc -modi calc -no-show-match -no-sort'
 clipcat_launcher = 'clipcat-menu'
-browser = "firefox"
+browser = "zen-browser"
 file_manager = "nemo"
 screenshot = "flameshot full"
 screenshot_gui = "flameshot gui"
@@ -210,8 +210,8 @@ class PinnedGroup(Group):
 
 
 groups = [
-    Group("1", label="󰈹", matches=[Match(wm_class="firefox")], layout="max"),
-    Group("2", label="", matches=[Match(wm_class=re.compile("(Code)|(kitty)"))], layout="columns"),
+    Group("1", label="󰈹", matches=[Match(wm_class="zen")], layout="max"),
+    Group("2", label="", matches=[Match(wm_class=re.compile("(Code)|(kitty)"))], layout="columns"),
     PinnedGroup("3", label="󰭹", matches=[Match(wm_class="discord")], layout="columns", pinned_screen=1),
     PinnedGroup("4", label="󰋙", matches=[Match(wm_class="Slippi Launcher")], layout="max", pinned_screen=0),
     PinnedGroup("5", label="󰓓", matches=[Match(wm_class=re.compile(r"steam.*|league.*"))], layout="columns", pinned_screen=0),
@@ -443,7 +443,6 @@ widgets_2 = [
     widget.Memory(padding=5, format="󰈀 {MemUsed:.0f}{mm}", background=gruvbox["cream"], foreground=gruvbox["dark-grey"], **slash_powerlineRight),
     widget.Clock(padding=5, format="  %a %d %b %I:%M:%S", foreground=gruvbox["yellow"], background=gruvbox["dark-grey"], **slash_powerlineRight),
     widget.PulseVolume(fmt="󰕾 {}", foreground=gruvbox["dark"], background=gruvbox["yellow"], padding=10, **slash_powerlineRight),
-    widget.Systray(padding=7, icon_size=15),
     widget.CurrentLayoutIcon(padding=5, scale=0.5),
 ]
 size = 30
