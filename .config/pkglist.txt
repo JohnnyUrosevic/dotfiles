@@ -36,6 +36,7 @@ dunst
 efibootmgr
 eza
 farge-git
+fd
 feh
 fightcade2
 firefox
@@ -151,6 +152,7 @@ rpi-imager
 rsync
 rustup
 scrot
+skim
 smartmontools
 spigot
 spotify
