@@ -3,12 +3,13 @@
 DIRS=(
     "$HOME"
     "$HOME/Code"
+    "$HOME/.config"
 )
 
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(fd . "${DIRS[@]}" --type=dir --max-depth=1 --full-path \
+    selected=$(fd . "${DIRS[@]}" --type=dir --max-depth=1 --full-path --unrestricted \
         | sed "s|^$HOME/||" \
         | sk --margin 10% --color="bw")
     [[ $selected ]] && selected="$HOME/$selected"
