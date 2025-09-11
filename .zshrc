@@ -65,3 +65,7 @@ export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/qt6/plugins/platforms #fix for slipp
 export EDITOR=nvim
 
 eval "$(zoxide init --cmd cd zsh)"
+
+if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
+  tmux attach-session -t main || tmux new-session -s main
+fi
