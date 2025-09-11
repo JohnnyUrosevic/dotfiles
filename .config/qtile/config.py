@@ -224,6 +224,8 @@ groups = [
 def go_to_group(g: Group):
 
     def callback(qtile):
+        qtile.groups_map['scratchpad'].hide_all()
+
         if len(qtile.screens) == 1 or (not fullscreen_mode and not g.screen_affinity):
             qtile.groups_map[g.name].toscreen()
             return
