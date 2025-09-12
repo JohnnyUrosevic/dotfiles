@@ -114,7 +114,6 @@ rounded_powerlineLeft = {"decorations": [PowerLineDecoration(path="rouded_left",
 slash_powerlineRight = {"decorations": [PowerLineDecoration(path="forward_slash", size=11)]}
 slash_powerlineLeft = {"decorations": [PowerLineDecoration(path="back_slash", size=11)]}
 ######## Applicaton Variables ###########
-terminal = 'kitty'
 app_launcher = 'zsh -c "rofi -show drun -disable-history -show-icons"'
 # make cmd launcher respect alisas
 cmd_launcher = 'rofi -run-list-command \". ~/.alias\" -run-command \"/usr/bin/zsh -i -c \'{cmd}\'\" -show run -disable-history'
@@ -257,7 +256,7 @@ dropdown_config = dict(
 
 groups.append(
     ScratchPad('scratchpad', [
-        DropDown('terminal', terminal, **dropdown_config),
+        DropDown('terminal', 'kitty -e sh -c "tmux attach-session -t scratch || tmux new-session -s scratch"', **dropdown_config),
         DropDown('music', 'spotify', **dropdown_config),
         DropDown('mixer', 'pavucontrol', **dropdown_config),
         DropDown('pomodoro', 'pomatez', **dropdown_config),
