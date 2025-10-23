@@ -119,6 +119,7 @@ app_launcher = 'zsh -c "rofi -show drun -disable-history -show-icons"'
 cmd_launcher = 'rofi -run-list-command \". ~/.alias\" -run-command \"/usr/bin/zsh -i -c \'{cmd}\'\" -show run -disable-history'
 win_launcher = 'zsh -c "rofi -show window -show-icons"'
 calc_launcher = 'rofi -show calc -modi calc -no-show-match -no-sort'
+emoji_launcher = 'rofi -modi emoji -show emoji'
 clipcat_launcher = 'clipcat-menu'
 browser = "zen-browser"
 file_manager = "nemo"
@@ -176,6 +177,7 @@ keys = [
     Key([alt], "space", lazy.spawn(cmd_launcher), desc="Launch Rofi run"),
     Key([alt], "w", lazy.spawn(win_launcher), desc="Launch Rofi Windows"),
     Key([mod], "c", lazy.spawn(calc_launcher), desc="Launch Rofi Qalc"),
+    Key([mod], "e", lazy.spawn(emoji_launcher), desc="Launch Rofi Emoji"),
     ######### Clipcat #########
     Key([alt], "c", lazy.spawn(clipcat_launcher), desc="Launch Rofi clipcat"),
     ######### Power and Lockscreen #########

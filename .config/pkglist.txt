@@ -34,6 +34,7 @@ docker-compose
 dolphin-emu
 dunst
 efibootmgr
+ethtool
 eza
 farge-git
 fd
@@ -56,6 +57,7 @@ gendesk
 general-tools
 geoclue
 ghostty
+gimp
 gnome-disk-utility
 gnome-keyring
 gnome-system-monitor
@@ -87,6 +89,7 @@ linux
 linux-firmware
 linux-headers
 lossless-adapter-manager
+lua-language-server
 lxappearance
 mangohud
 mangojuice
@@ -100,6 +103,7 @@ nemo-fileroller
 neofetch
 neovim-git
 networkmanager
+nix
 nm-connection-editor
 nmap
 noto-fonts
@@ -119,6 +123,7 @@ picom-git
 pipewire
 pipewire-alsa
 pipewire-jack
+pipewire-pulse
 playerctl
 pokemmo
 pomatez
@@ -127,7 +132,6 @@ protobuf
 proton-ge-custom-bin
 prowlarr
 pulseaudio-alsa
-pulseaudio-bluetooth
 python-dateutil
 python-iwlib
 python-pip
@@ -148,6 +152,7 @@ reflector
 ripgrep
 rofi
 rofi-calc
+rofi-emoji
 rpi-imager
 rsync
 rustup
@@ -162,6 +167,7 @@ surfraw
 tigervnc
 tk
 tree-sitter-git
+ttf-joypixels
 ttf-meslo-nerd-font-powerlevel10k
 tumbler
 twitch-downloader-gui
