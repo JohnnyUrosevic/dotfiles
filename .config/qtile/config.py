@@ -71,7 +71,7 @@ def exit_fullscreen(qtile):
 
 def fullscreen_window_exists(qtile):
     for info in qtile.windows():
-        if info['fullscreen']:
+        if info['fullscreen'] and not 'zen' in info['wm_class']:
             return True, info['id'], info['group']
 
     return False, None, None
@@ -80,7 +80,6 @@ def fullscreen_window_exists(qtile):
 @hook.subscribe.float_change
 def checkforfullscreen():
     global fullscreen_mode
-    # not ('firefox' in qtile.current_window.get_wm_class())
     res, window, group = fullscreen_window_exists(qtile)
     if res:
         enter_fullscreen(qtile, window, group)
