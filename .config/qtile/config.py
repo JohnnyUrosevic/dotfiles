@@ -51,7 +51,7 @@ def enter_fullscreen(qtile, window, group):
     qtile.focus_screen(0)
     qtile.groups_map['fullscreen'].toscreen()
 
-    qtile.config.update(follow_mouse_focus=False)
+    # qtile.config.update(follow_mouse_focus=False)
 
 
 def exit_fullscreen(qtile):
@@ -66,7 +66,7 @@ def exit_fullscreen(qtile):
         qtile.windows_map[window].togroup(home)
 
     fullscreen_window = None
-    qtile.config.update(follow_mouse_focus=True)
+    # qtile.config.update(follow_mouse_focus=True)
 
 
 def fullscreen_window_exists(qtile):
@@ -476,7 +476,7 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = True
 cursor_warp = True
 auto_fullscreen = True
