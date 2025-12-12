@@ -157,6 +157,7 @@ rpi-imager
 rsync
 rustup
 scrot
+shotcut
 skim
 smartmontools
 spigot
@@ -175,11 +176,11 @@ ueberzug
 unarchiver
 unzip
 vencord-desktop-git
-video-trimmer
 vim
 virt-manager
 visual-studio-code-bin
 vlc
+vlc-plugins-all
 vrrtest-git
 vulkan-radeon
 wget
