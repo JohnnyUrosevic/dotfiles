@@ -52,7 +52,6 @@ gamecube-examples
 gamecube-pkg-config
 gamecube-tools
 gamemode
-gcadapter-oc-dkms
 gdu
 gendesk
 general-tools
