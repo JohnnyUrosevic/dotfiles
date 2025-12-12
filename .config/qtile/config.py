@@ -60,10 +60,11 @@ def exit_fullscreen(qtile):
 
     fullscreen_mode = False
 
-    window, home = fullscreen_window
+    if fullscreen_window:
+        window, home = fullscreen_window
 
-    if window in [info['id'] for info in qtile.windows()]:
-        qtile.windows_map[window].togroup(home)
+        if window in [info['id'] for info in qtile.windows()]:
+            qtile.windows_map[window].togroup(home)
 
     fullscreen_window = None
     # qtile.config.update(follow_mouse_focus=True)
