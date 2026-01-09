@@ -14,6 +14,8 @@ redshift -l '34.05:-118.15' -t '6500:2500' &
 
 discord &
 steam &
+1password --silent &
+obsidian &
 kitty &
 
 seventeenlands &
