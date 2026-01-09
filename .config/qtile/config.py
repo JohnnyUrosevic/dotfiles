@@ -1,5 +1,5 @@
 #########################################
-########## Importing Libreries ##########
+########## Importing Libraries ##########
 #########################################
 
 import re
@@ -218,7 +218,7 @@ groups = [
     PinnedGroup("5", label="󰓓", matches=[Match(wm_class=re.compile(r"steam.*|league.*"))], layout="columns", pinned_screen=0),
     Group("6", label="", matches=[Match(wm_class="obsidian")], layout="max"),
     Group("7", label="", matches=[Match(wm_class="nemo")], layout="columns"),
-    PinnedGroup("8", label="󰚀", matches=[Match(wm_class=re.compile(r"qBittorrent|via.*"))], layout="columns", pinned_screen=0),
+    PinnedGroup("8", label="󰚀", matches=[Match(wm_class=re.compile(r"qBittorrent|via.*|1password"))], layout="columns", pinned_screen=0),
 ]
 
 
@@ -388,6 +388,12 @@ widgets = [
     widget.Memory(padding=5, format="󰈀 {MemUsed:.0f}{mm}", background=gruvbox["cream"], foreground=gruvbox["dark-grey"], **slash_powerlineRight),
     widget.Clock(padding=5, format="  %a %d %b %I:%M:%S", foreground=gruvbox["yellow"], background=gruvbox["dark-grey"], **slash_powerlineRight),
     widget.PulseVolume(fmt="󰕾 {}", foreground=gruvbox["dark"], background=gruvbox["yellow"], padding=10, **slash_powerlineRight),
+    widget.Mpris2(background=gruvbox["cream"],
+                  foreground=gruvbox["dark-grey"],
+                  format='{xesam:artist} - {xesam:title}',
+                  paused_text='  ',
+                  scroll=False,
+                  **slash_powerlineRight),
     widget.Systray(padding=7, icon_size=15),
     widget.CurrentLayoutIcon(padding=5, scale=0.5),
 ]
@@ -446,6 +452,12 @@ widgets_2 = [
     widget.Memory(padding=5, format="󰈀 {MemUsed:.0f}{mm}", background=gruvbox["cream"], foreground=gruvbox["dark-grey"], **slash_powerlineRight),
     widget.Clock(padding=5, format="  %a %d %b %I:%M:%S", foreground=gruvbox["yellow"], background=gruvbox["dark-grey"], **slash_powerlineRight),
     widget.PulseVolume(fmt="󰕾 {}", foreground=gruvbox["dark"], background=gruvbox["yellow"], padding=10, **slash_powerlineRight),
+    widget.Mpris2(background=gruvbox["cream"],
+                  foreground=gruvbox["dark-grey"],
+                  format='{xesam:artist} - {xesam:title}',
+                  paused_text='  ',
+                  scroll=False,
+                  **slash_powerlineRight),
     widget.CurrentLayoutIcon(padding=5, scale=0.5),
 ]
 size = 30
