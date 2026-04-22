@@ -3,7 +3,7 @@
 	url = https://github.com/paulirish/git-open
 [submodule ".config/.oh-my-zsh/plugins/zsh-archlinux"]
 	path = .config/.oh-my-zsh/plugins/zsh-archlinux
-	url = https://github.com/JohnnyUrosevic/zsh-archlinux/tree/main
+	url = https://github.com/JohnnyUrosevic/zsh-archlinux
 [submodule ".config/.oh-my-zsh/plugins/zsh-autosuggestions"]
 	path = .config/.oh-my-zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
