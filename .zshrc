@@ -36,7 +36,9 @@ if [[ $machine = "Linux" ]]; then
   plugins+=('zsh-archlinux')
 fi
 
-source $ZSH/oh-my-zsh.sh
+if [ -f "$ZSH/oh-my-zsh.sh" ]; then
+  source $ZSH/oh-my-zsh.sh
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
