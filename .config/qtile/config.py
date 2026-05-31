@@ -214,7 +214,7 @@ groups = [
     Group("1", label="󰈹", matches=[Match(wm_class="zen")], layout="max"),
     Group("2", label="", matches=[Match(wm_class=re.compile("(Code)|(kitty)"))], layout="columns"),
     PinnedGroup("3", label="󰭹", matches=[Match(wm_class="discord")], layout="columns", pinned_screen=1),
-    PinnedGroup("4", label="󰋙", matches=[Match(wm_class="Slippi Launcher")], layout="max", pinned_screen=0),
+    PinnedGroup("4", label="󰋙", matches=[Match(wm_class=re.compile(r"(Slippi Launcher)|(rwing)"))], layout="max", pinned_screen=0),
     PinnedGroup("5", label="󰓓", matches=[Match(wm_class=re.compile(r"steam.*|league.*"))], layout="columns", pinned_screen=0),
     Group("6", label="", matches=[Match(wm_class="obsidian")], layout="max"),
     Group("7", label="", matches=[Match(wm_class="nemo")], layout="columns"),
@@ -269,7 +269,7 @@ for i in groups:
         # mod1 + letter of group = switch to group
         Key([mod], i.name, lazy.function(go_to_group(i)), desc="Switch to group {}".format(i.name)),
         # mod1 + shift + letter of group = move focused window to group
-        Key([mod, "shift"], i.name, lazy.function(go_to_group_and_move_window(i), desc="move focused window to group {}".format(i.name)),
+        Key([mod, "shift"], i.name, lazy.function(go_to_group_and_move_window(i)), desc="move focused window to group {}".format(i.name)),
     ])
 
 dropdown_config = dict(
