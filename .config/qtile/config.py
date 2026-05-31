@@ -241,13 +241,35 @@ def go_to_group(g: Group):
 
     return callback
 
+def go_to_group_and_move_window(g: Group):
+
+    def callback(qtile):
+
+        qtile.groups_map['scratchpad'].hide_all()
+
+        if len(qtile.screens) == 1 or (not fullscreen_mode and not g.screen_affinity):
+            qtile.current_window.togroup(name, switch_group=True)
+            return
+
+        if fullscreen_mode and g.name != 'fullscreen':
+            qtile.focus_screen(1)
+            qtile.current_window.togroup(g.name, switch_group=False)
+            qtile.groups_map[g.name].toscreen()
+            return
+
+        qtile.current_window.togroup(g.name, switch_group=False)
+        qtile.focus_screen(g.screen_affinity)
+        qtile.groups_map[g.name].toscreen()
+
+    return callback
+
 
 for i in groups:
     keys.extend([
         # mod1 + letter of group = switch to group
         Key([mod], i.name, lazy.function(go_to_group(i)), desc="Switch to group {}".format(i.name)),
         # mod1 + shift + letter of group = move focused window to group
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=False), desc="move focused window to group {}".format(i.name)),
+        Key([mod, "shift"], i.name, lazy.function(go_to_group_and_move_window(i), desc="move focused window to group {}".format(i.name)),
     ])
 
 dropdown_config = dict(
@@ -256,10 +278,16 @@ dropdown_config = dict(
     height=0.5,
 )
 
+spotify_config = dict(
+    on_focus_lost_hide=False,
+    y=0.10,
+    height=0.75,
+)
+
 groups.append(
     ScratchPad('scratchpad', [
         DropDown('terminal', 'kitty -e sh -c "tmux attach-session -t scratch || tmux new-session -s scratch"', **dropdown_config),
-        DropDown('music', 'spotify', **dropdown_config),
+        DropDown('music', 'spotify', **spotify_config),
         DropDown('mixer', 'pavucontrol', **dropdown_config),
         DropDown('pomodoro', 'pomatez', **dropdown_config),
         DropDown('system-monitor', 'gnome-system-monitor', **dropdown_config),
@@ -394,7 +422,7 @@ widgets = [
                   paused_text='  ',
                   scroll=False,
                   **slash_powerlineRight),
-    widget.Systray(padding=7, icon_size=15),
+    widget.StatusNotifier(padding=7, icon_size=15),
     widget.CurrentLayoutIcon(padding=5, scale=0.5),
 ]
 
