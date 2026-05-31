@@ -56,7 +56,6 @@ gdu
 gendesk
 general-tools
 geoclue
-ghostty
 gimp
 gnome-disk-utility
 gnome-keyring
@@ -101,11 +100,13 @@ nano
 nemo
 nemo-fileroller
 neofetch
-neovim-git
+neovim
 networkmanager
+nil-git
 nix
 nm-connection-editor
 nmap
+nnd
 noto-fonts
 noto-fonts-cjk
 npm
@@ -133,7 +134,9 @@ proton-ge-custom-bin
 prowlarr
 pulseaudio-alsa
 python-dateutil
+python-dbus-fast
 python-iwlib
+python-mpris2
 python-pip
 python-psutil
 python-pulsectl
@@ -156,6 +159,7 @@ rofi-emoji
 rpi-imager
 rsync
 rustup
+rwing
 scrot
 shotcut
 skim
@@ -167,7 +171,6 @@ steamtinkerlaunch-git
 surfraw
 tigervnc
 tk
-tree-sitter-git
 ttf-joypixels
 ttf-meslo-nerd-font-powerlevel10k
 tumbler
@@ -175,7 +178,6 @@ twitch-downloader-gui
 ueberzug
 unarchiver
 unzip
-vencord-desktop-git
 vim
 virt-manager
 visual-studio-code-bin
@@ -188,6 +190,7 @@ wine-lol-bin
 winetricks
 wireless_tools
 wireplumber
+wlr-randr
 wlroots0.18
 wpa_supplicant
 wpgtk-git
