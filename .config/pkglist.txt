@@ -115,6 +115,7 @@ obs-studio
 obsidian
 ogc-cmake
 openssh
+otf-droid-nerd
 pacman-cleanup-hook
 pacman-log-orphans-hook
 paru
