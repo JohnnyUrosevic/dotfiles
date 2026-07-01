@@ -68,6 +68,8 @@ export EDITOR=nvim
 
 eval "$(zoxide init --cmd cd zsh)"
 
+CORRECT_IGNORE_FILE='.*'
+
 if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
   tmux attach-session -t home || tmux new-session -s home
 fi
