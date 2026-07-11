@@ -248,7 +248,7 @@ def go_to_group_and_move_window(g: Group):
         qtile.groups_map['scratchpad'].hide_all()
 
         if len(qtile.screens) == 1 or (not fullscreen_mode and not g.screen_affinity):
-            qtile.current_window.togroup(name, switch_group=True)
+            qtile.current_window.togroup(g.name, switch_group=True)
             return
 
         if fullscreen_mode and g.name != 'fullscreen':
