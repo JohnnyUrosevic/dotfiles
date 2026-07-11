@@ -16,8 +16,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # Use different ZSH custom folder so we can use git submodules to track plugins
 export ZSH_CUSTOM="$HOME/.config/.oh-my-zsh"
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
 zstyle ':omz:update' mode auto      # update automatically without asking
 zstyle ':completion:*' completer _expand_alias _complete _ignored
 
@@ -27,8 +25,6 @@ COMPLETION_WAITING_DOTS="true"
 
 plugins=(
   git
-  zsh-autosuggestions
-  zsh-syntax-highlighting
   git-open
 )
 
@@ -70,6 +66,22 @@ eval "$(zoxide init --cmd cd zsh)"
 
 CORRECT_IGNORE_FILE='.*'
 
+THEME="/usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme"
+if [ -f "$THEME" ]; then
+  source $THEME
+fi
+
+AUTOSUGGEST="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+if [ -f "$AUTOSUGGEST" ]; then
+  source $AUTOSUGGEST
+fi
+
+HIGHLIGHTING="/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [ -f "$HIGHLIGHTING" ]; then
+  source $HIGHLIGHTING
+fi
+
 if command -v tmux &>/dev/null && [ -z "$TMUX" ]; then
   tmux attach-session -t home || tmux new-session -s home
 fi
+

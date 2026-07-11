@@ -170,6 +170,7 @@ spotify
 steam
 steamtinkerlaunch-git
 surfraw
+tailscale
 tigervnc
 tk
 ttf-joypixels
@@ -241,4 +242,7 @@ zig
 zoxide
 zram-generator
 zsh
+zsh-autosuggestions
+zsh-syntax-highlighting
+zsh-theme-powerlevel10k
 zsync
